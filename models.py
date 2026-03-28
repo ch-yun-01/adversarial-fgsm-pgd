@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-import torchvision.models as models
+from torchvision.models import resnet18, ResNet18_Weights
 
 
 class MNIST_Net(nn.Module):
@@ -47,7 +47,7 @@ class CIFAR_Net(nn.Module):
         super().__init__()
 
         # pretrained ResNet18
-        self.model = models.resnet18(pretrained=True)
+        self.model = resnet18(weights=ResNet18_Weights.DEFAULT)
 
         # CIFAR용 수정 (중요)
         self.model.conv1 = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1, bias=False)

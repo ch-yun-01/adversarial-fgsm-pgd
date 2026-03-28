@@ -9,9 +9,8 @@ from attack import fgsm_targeted, fgsm_untargeted, pgd_targeted
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
-# =========================
 # DATA
-# =========================
+
 mnist_transform = transforms.Compose([
     transforms.ToTensor(),
     transforms.Normalize((0.5,), (0.5,))
@@ -35,17 +34,19 @@ cifar_trainloader = torch.utils.data.DataLoader(cifar_train, batch_size=64, shuf
 cifar_testloader = torch.utils.data.DataLoader(cifar_test, batch_size=64, shuffle=False)
 
 
-# TRAIN / LOAD
-print("[TRAIN start] MNIST")
+# TRAIN
+
+
+print("\n=== TRAIN (MNIST) ===")
 mnist_model = train(MNIST_Net(), mnist_trainloader, device, ckpt_path="./ckpt/mnist.pth")
-print("[TRAIN done]")
+print("DONE")
 
-print("[TRAIN start] CIFAR10")
+print("\n=== ATTACK (CIFAR10) ===")
 cifar_model = train(CIFAR_Net(), cifar_trainloader, device, epochs = 10, ckpt_path="./ckpt/cifar.pth")
-print("[TRAIN done]")
+print("DONE")
 
 
-# CLEAN ACCURACY
+# MODEL ACCURACY
 def evaluate_model(model, loader):
     model.eval()
 
@@ -93,27 +94,28 @@ def evaluate_attack(model, loader, attack, targeted=False, eps=0.1):
     return correct / total
 
 
-# RUN
-print("\n=== CLEAN ACCURACY ===")
+# EVALUATE MODEL ACC
+print("\n=== MODEL ACCURACY ===")
 print("MNIST:", evaluate_model(mnist_model, mnist_testloader))
 print("CIFAR:", evaluate_model(cifar_model, cifar_testloader))
 
 
-# eps = 0.1
+# TEST ATTACK
+eps = 0.1
 
-# print("\n=== ATTACK (MNIST) ===")
-# print("FGSM Targeted:", evaluate_attack(mnist_model, mnist_testloader, fgsm_targeted, True, eps))
-# print("FGSM Untargeted:", evaluate_attack(mnist_model, mnist_testloader, fgsm_untargeted, False, eps))
-# print("PGD Targeted:", evaluate_attack(
-#     mnist_model, mnist_testloader,
-#     lambda m,x,y,e: pgd_targeted(m,x,y,10,e,0.01), True, eps
-# ))
+print("\n=== ATTACK (MNIST) ===")
+print("FGSM Targeted:", evaluate_attack(mnist_model, mnist_testloader, fgsm_targeted, True, eps))
+print("FGSM Untargeted:", evaluate_attack(mnist_model, mnist_testloader, fgsm_untargeted, False, eps))
+print("PGD Targeted:", evaluate_attack(
+    mnist_model, mnist_testloader,
+    lambda m,x,y,e: pgd_targeted(m,x,y,10,e,0.01), True, eps
+))
 
 
-# print("\n=== ATTACK (CIFAR) ===")
-# print("FGSM Targeted:", evaluate_attack(cifar_model, cifar_testloader, fgsm_targeted, True, eps))
-# print("FGSM Untargeted:", evaluate_attack(cifar_model, cifar_testloader, fgsm_untargeted, False, eps))
-# print("PGD Targeted:", evaluate_attack(
-#     cifar_model, cifar_testloader,
-#     lambda m,x,y,e: pgd_targeted(m,x,y,10,e,0.01), True, eps
-# ))
+print("\n=== ATTACK (CIFAR) ===")
+print("FGSM Targeted:", evaluate_attack(cifar_model, cifar_testloader, fgsm_targeted, True, eps))
+print("FGSM Untargeted:", evaluate_attack(cifar_model, cifar_testloader, fgsm_untargeted, False, eps))
+print("PGD Targeted:", evaluate_attack(
+    cifar_model, cifar_testloader,
+    lambda m,x,y,e: pgd_targeted(m,x,y,10,e,0.01), True, eps
+))
