@@ -1,0 +1,74 @@
+[
+  {
+    "dataset": "mnist",
+    "eps": 1e-10,
+    "loss_func": "ce",
+    "FGSM Targeted": 0.00234375,
+    "FGSM Untargeted": 0.03421875,
+    "PGD Targeted": 0.00234375,
+    "PGD Untargeted": 0.03421875
+  },
+  {
+    "dataset": "cifar10",
+    "eps": 1e-10,
+    "loss_func": "ce",
+    "FGSM Targeted": 0.0146875,
+    "FGSM Untargeted": 0.2784375,
+    "PGD Targeted": 0.0146875,
+    "PGD Untargeted": 0.2784375
+  },
+  {
+    "dataset": "mnist",
+    "eps": 1e-10,
+    "loss_func": "mse",
+    "FGSM Targeted": 0.00234375,
+    "FGSM Untargeted": 0.03421875,
+    "PGD Targeted": 0.00234375,
+    "PGD Untargeted": 0.03421875
+  },
+  {
+    "dataset": "cifar10",
+    "eps": 1e-10,
+    "loss_func": "mse",
+    "FGSM Targeted": 0.0146875,
+    "FGSM Untargeted": 0.2784375,
+    "PGD Targeted": 0.0146875,
+    "PGD Untargeted": 0.2784375
+  },
+  {
+    "dataset": "mnist",
+    "eps": 1e-10,
+    "loss_func": "kl",
+    "FGSM Targeted": 0.00234375,
+    "FGSM Untargeted": 0.03421875,
+    "PGD Targeted": 0.00234375,
+    "PGD Untargeted": 0.03421875
+  },
+  {
+    "dataset": "cifar10",
+    "eps": 1e-10,
+    "loss_func": "kl",
+    "FGSM Targeted": 0.0146875,
+    "FGSM Untargeted": 0.2784375,
+    "PGD Targeted": 0.0146875,
+    "PGD Untargeted": 0.2784375
+  },
+  {
+    "dataset": "mnist",
+    "eps": 1e-10,
+    "loss_func": "margin",
+    "FGSM Targeted": 0.00234375,
+    "FGSM Untargeted": 0.03421875,
+    "PGD Targeted": 0.00234375,
+    "PGD Untargeted": 0.03421875
+  },
+  {
+    "dataset": "cifar10",
+    "eps": 1e-10,
+    "loss_func": "margin",
+    "FGSM Targeted": 0.0146875,
+    "FGSM Untargeted": 0.2784375,
+    "PGD Targeted": 0.0146875,
+    "PGD Untargeted": 0.2784375
+  }
+]
