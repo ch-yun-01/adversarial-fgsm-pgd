@@ -128,7 +128,7 @@ def pgd_targeted(model, x, target, k, eps, eps_step, criterion='ce'):
         x_adv = x_adv.detach().requires_grad_(True)
         logits = model(x_adv)
 
-        loss = _compute_loss(criterion, logits, target, False)
+        loss = _compute_loss(criterion, logits, target, True)
 
         model.zero_grad(set_to_none=True)
         loss.backward()
