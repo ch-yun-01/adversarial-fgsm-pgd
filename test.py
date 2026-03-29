@@ -163,5 +163,5 @@ for eps in eps_list:
         print(cifar_result)
 
 # save results 
-with open('./attack_success_rate.json', "w") as f:
+with open('./results/attack_success_rate.json', "w") as f:
     json.dump(attack_success_rate, f, indent=2)
