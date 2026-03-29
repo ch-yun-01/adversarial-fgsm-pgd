@@ -49,6 +49,11 @@ def evaluate_model(model, loader):
 
     return correct / total
 
+def get_random_target(y, num_classes=10):
+    target = torch.randint(0, num_classes, y.shape, device=y.device)
+    target = (target + (target == y)) % num_classes
+    return target
+
 
 # ATTACK ACCURACY
 def evaluate_attack(model, loader, attack, targeted=False, eps=0.1):
@@ -62,7 +67,7 @@ def evaluate_attack(model, loader, attack, targeted=False, eps=0.1):
         x, y = x.to(device), y.to(device)
 
         if targeted:
-            target = (y + 1) % 10
+            target = get_random_target(y)
             adv = attack(model, x, target, eps)
             pred = model(adv).argmax(1)
             correct += (pred == target).sum().item()
@@ -82,8 +87,8 @@ print("CIFAR:", evaluate_model(cifar_model, cifar_testloader))
 
 
 # TEST ATTACK
-eps_list = [1e-10, 1e-9, 1e-8, 1e-7, 1e-6, 1e-5, 1e-4, 1e-3, 0.01, 0.05, 0.1, 0.2, 0.3]
-attack_acc = []
+eps_list = [1e-4, 1e-3, 0.01, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3]
+attack_success_rate = []
 loss_func_list = ['ce', 'mse', 'kl', 'margin']
 
 for eps in eps_list:
@@ -151,11 +156,12 @@ for eps in eps_list:
             )
         }
 
-        attack_acc.append(mnist_result)
-        attack_acc.append(cifar_result)
+        attack_success_rate.append(mnist_result)
+        attack_success_rate.append(cifar_result)
 
         print(mnist_result)
         print(cifar_result)
 
-    with open('./attack_acc.json', "w") as f:
-        json.dump(attack_acc, f, indent=2)
+# save results 
+with open('./attack_success_rate.json', "w") as f:
+    json.dump(attack_success_rate, f, indent=2)
