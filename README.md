@@ -3,7 +3,6 @@
 
 ## 📂 Project Structure
 ```bash
-.
 ├── ckpt/                         # saved model checkpoints
 ├── results/                      # adversarial examples & attack success rate json
 ├── attack.py                     # FGSM / PGD implementations
