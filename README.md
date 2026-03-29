@@ -17,7 +17,10 @@
 ```
 
 ## Run attack / evaluation
+```bash
 python test.py
+```
+
 
 ### 📊 Datasets
 - **MNIST** (grayscale, 28×28)
