@@ -3,7 +3,7 @@ import torchvision
 import torchvision.transforms as transforms
 import json
 from tqdm import tqdm
-
+import time
 from models import MNIST_Net, CIFAR_Net
 from train import train
 from attack import fgsm_targeted, fgsm_untargeted, pgd_targeted, pgd_untargeted
@@ -87,6 +87,7 @@ print("\n=== MODEL ACCURACY ===")
 print("MNIST:", evaluate_model(mnist_model, mnist_testloader))
 print("CIFAR:", evaluate_model(cifar_model, cifar_testloader))
 
+import pdb; breakpoint()
 
 # TEST ATTACK
 eps_list = [1e-4, 1e-3, 0.01, 0.03, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5]
