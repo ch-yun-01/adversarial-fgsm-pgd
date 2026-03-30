@@ -46,10 +46,11 @@ class CIFAR_Net(nn.Module):
     def __init__(self):
         super().__init__()
 
-        # pretrained ResNet18
+        # Backbone: ResNet-18 pretrained on ImageNet
+        # Source paper: He et al. (2016), Deep Residual Learning for Image Recognition
         self.model = resnet18(weights=ResNet18_Weights.DEFAULT)
 
-        # CIFAR용 수정 (중요)
+        # Replace final layer for CIFAR-10 classification
         self.model.conv1 = nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1, bias=False)
         self.model.maxpool = nn.Identity()
 
