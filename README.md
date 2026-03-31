@@ -9,7 +9,8 @@
 ├── models.py                     # MNIST / CIFAR-10 CNN architectures
 ├── train.py                      # baseline model training script
 ├── test.py                       # evaluation & attack execution script
-├── analyze.ipynb                 # result analysis (JSON-based)
+├── attack_results_analysis.ipynb # result analysis (JSON-based)
+├── feature_analysis.py           # feature embedding analysis (PCA / distance distribution)
 ├── visualize.ipynb               # adversarial example visualization
 ├── requirements.txt              # dependencies
 └── README.md
